@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { postCreateNewUser } from '../../../service/apiService';
 
 import { FcPlus } from 'react-icons/fc';
-
 import { toast } from 'react-toastify';
 
-const ModalCreateUser = (props) => {
-    const { show, setShow } = props;
+import _ from 'lodash';
+
+const ModalUpdateUser = (props) => {
+    const { show, setShow, dataUpdate } = props;
 
     const handleClose = () => {
         setShow(false);
@@ -27,6 +28,16 @@ const ModalCreateUser = (props) => {
     const [role, setRole] = useState('USER');
     const [image, setImage] = useState('');
     const [previewimage, setPreViewImage] = useState('');
+
+    useEffect(() => {
+        if (!_.isEmpty(dataUpdate)) {
+            setEmail(dataUpdate.email);
+            setUsername(dataUpdate.username);
+            setRole(dataUpdate.role);
+            setImage('');
+        }
+        console.log(dataUpdate);
+    }, [dataUpdate]);
 
     const handleUploadImg = (event) => {
         setPreViewImage(URL.createObjectURL(event.target.files[0]));
@@ -72,7 +83,7 @@ const ModalCreateUser = (props) => {
         <>
             <Modal show={show} onHide={handleClose} size="xl" backdrop="static" className="modal-add-user">
                 <Modal.Header closeButton>
-                    <Modal.Title>Add new user</Modal.Title>
+                    <Modal.Title>Update a user</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="row g-3">
@@ -136,4 +147,4 @@ const ModalCreateUser = (props) => {
     );
 };
 
-export default ModalCreateUser;
+export default ModalUpdateUser;
