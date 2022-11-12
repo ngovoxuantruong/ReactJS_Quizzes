@@ -18,6 +18,7 @@ const ModalUpdateUser = (props) => {
         setUsername('');
         setRole('');
         setImage('');
+        setPreViewImage('');
     };
 
     const handleShow = () => setShow(true);
@@ -35,8 +36,10 @@ const ModalUpdateUser = (props) => {
             setUsername(dataUpdate.username);
             setRole(dataUpdate.role);
             setImage('');
+            if (dataUpdate.image) {
+                setPreViewImage(`data:image/jpeg;base64, ${dataUpdate.image}`);
+            }
         }
-        console.log(dataUpdate);
     }, [dataUpdate]);
 
     const handleUploadImg = (event) => {
@@ -93,6 +96,7 @@ const ModalUpdateUser = (props) => {
                                 type="email"
                                 className="form-control"
                                 value={email}
+                                disabled
                                 onChange={(event) => setEmail(event.target.value)}
                             />
                         </div>
@@ -102,6 +106,7 @@ const ModalUpdateUser = (props) => {
                                 type="password"
                                 className="form-control"
                                 value={password}
+                                disabled
                                 onChange={(event) => setPassword(event.target.value)}
                             />
                         </div>
@@ -117,8 +122,12 @@ const ModalUpdateUser = (props) => {
                         </div>
                         <div className="col-md-6">
                             <label className="form-label">Roles</label>
-                            <select className="form-select" onChange={(event) => setRole(event.target.value)}>
-                                <option value="USER">USER</option>
+                            <select
+                                className="form-select"
+                                onChange={(event) => setRole(event.target.value)}
+                                value={role}
+                            >
+                                <option value="ROLE">USER</option>
                                 <option value="ADMIN">ADMIN</option>
                             </select>
                         </div>
