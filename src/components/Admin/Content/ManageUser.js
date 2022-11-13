@@ -4,6 +4,9 @@ import { FcPlus } from 'react-icons/fc';
 import './ManageUser.scss';
 import ModalCreateUser from './ModalCreateUser';
 import ModalUpdateUser from './ModalUpdateUser';
+import ModalViewUser from './ModalViewUser';
+import ModalDeleteUser from './ModalDeleteUser';
+
 import TableUser from './TableUser';
 import { getAllUsers } from '../../../service/apiService';
 
@@ -12,7 +15,13 @@ const ManageUser = (props) => {
 
     const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
 
+    const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
+
+    const [showModalViewUser, setShowModalViewUser] = useState(false);
+
     const [dataUpdate, setDateUpdate] = useState({});
+
+    const [dataDelete, setDateDelete] = useState({});
 
     const [listUsers, setListUsers] = useState([
         {
@@ -45,6 +54,20 @@ const ManageUser = (props) => {
         setDateUpdate(user);
     };
 
+    const handleClickBtnView = (user) => {
+        setShowModalViewUser(true);
+        setDateUpdate(user);
+    };
+
+    const resetUpdateDate = () => {
+        setDateUpdate({});
+    };
+
+    const handleClickBtnDelete = (user) => {
+        setShowModalDeleteUser(true);
+        setDateDelete(user);
+    };
+
     return (
         <div className="manage-user-container">
             <div className="title">Manage User</div>
@@ -57,7 +80,12 @@ const ManageUser = (props) => {
                 </div>
 
                 <div className="table-users-container">
-                    <TableUser listUsers={listUsers} handleClickBtnUpdate={handleClickBtnUpdate} />
+                    <TableUser
+                        listUsers={listUsers}
+                        handleClickBtnUpdate={handleClickBtnUpdate}
+                        handleClickBtnView={handleClickBtnView}
+                        handleClickBtnDelete={handleClickBtnDelete}
+                    />
                 </div>
                 <ModalCreateUser
                     show={showModalCreateUser}
@@ -65,7 +93,17 @@ const ManageUser = (props) => {
                     fetchListUsers={fetchListUsers}
                 />
 
-                <ModalUpdateUser setShow={setShowModalUpdateUser} show={showModalUpdateUser} dataUpdate={dataUpdate} />
+                <ModalUpdateUser
+                    setShow={setShowModalUpdateUser}
+                    show={showModalUpdateUser}
+                    dataUpdate={dataUpdate}
+                    fetchListUsers={fetchListUsers}
+                    resetUpdateDate={resetUpdateDate}
+                />
+
+                <ModalViewUser dataUpdate={dataUpdate} show={showModalViewUser} setShow={setShowModalViewUser} />
+
+                <ModalDeleteUser show={showModalDeleteUser} setShow={setShowModalDeleteUser} dataDelete={dataDelete} />
             </div>
         </div>
     );
