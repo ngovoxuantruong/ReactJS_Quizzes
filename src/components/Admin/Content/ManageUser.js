@@ -78,7 +78,6 @@ const ManageUser = (props) => {
                         <FcPlus /> Add new users
                     </button>
                 </div>
-
                 <div className="table-users-container">
                     <TableUser
                         listUsers={listUsers}
@@ -92,7 +91,6 @@ const ManageUser = (props) => {
                     setShow={setShowModalCreateUser}
                     fetchListUsers={fetchListUsers}
                 />
-
                 <ModalUpdateUser
                     setShow={setShowModalUpdateUser}
                     show={showModalUpdateUser}
@@ -100,10 +98,14 @@ const ManageUser = (props) => {
                     fetchListUsers={fetchListUsers}
                     resetUpdateDate={resetUpdateDate}
                 />
-
                 <ModalViewUser dataUpdate={dataUpdate} show={showModalViewUser} setShow={setShowModalViewUser} />
 
-                <ModalDeleteUser show={showModalDeleteUser} setShow={setShowModalDeleteUser} dataDelete={dataDelete} />
+                <ModalDeleteUser
+                    show={showModalDeleteUser}
+                    setShow={setShowModalDeleteUser}
+                    dataDelete={dataDelete}
+                    fetchListUsers={fetchListUsers}
+                />
             </div>
         </div>
     );

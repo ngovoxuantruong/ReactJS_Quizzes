@@ -15,10 +15,10 @@ const TableUser = (props) => {
             <tbody>
                 {listUsers &&
                     listUsers.length > 0 &&
-                    listUsers.map((listUser) => {
+                    listUsers.map((listUser, index) => {
                         return (
                             <tr key={listUser.id}>
-                                <td>{listUser.id}</td>
+                                <td>{index + 1}</td>
                                 <td>{listUser.username}</td>
                                 <td>{listUser.email}</td>
                                 <td>{listUser.role}</td>
