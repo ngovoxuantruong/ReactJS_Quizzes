@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { deleteUser } from '../../../service/apiService';
 
 const ModalDeleteUser = (props) => {
-    const { show, setShow, dataDelete } = props;
+    const { show, setShow, dataDelete, fetchListUsersWithPaginate } = props;
 
     const handleClose = () => setShow(false);
 
@@ -16,7 +16,8 @@ const ModalDeleteUser = (props) => {
         if (data && data.EC === 0) {
             toast.success(data.EM);
             handleClose();
-            await props.fetchListUsers();
+            props.setCurrentPage(1);
+            await props.fetchListUsersWithPaginate(1);
         }
 
         if (data && data.EC !== 0) {
