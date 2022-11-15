@@ -26,7 +26,6 @@ const Layout = (props) => {
                     </Route>
 
                     <Route path="/login" element={<Login />} />
-
                     <Route path="/signup" element={<SignUp />} />
                 </Routes>
 

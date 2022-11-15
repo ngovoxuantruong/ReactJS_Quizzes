@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { BsFillEyeSlashFill } from 'react-icons/bs';
+import { BsFillEyeFill } from 'react-icons/bs';
 
 import { postLogin } from '../../service/apiService';
 import './Login.scss';
@@ -10,6 +12,8 @@ const Login = (props) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = async () => {
         // Validate
@@ -54,14 +58,19 @@ const Login = (props) => {
                     />
                 </div>
 
-                <div className="form-group">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                    />
+                <div className="form-group input-password">
+                    <div>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            className="form-control"
+                            value={password}
+                            placeholder="Password"
+                            onChange={(event) => setPassword(event.target.value)}
+                        />
+                        <span className="toggle-eyes" onClick={() => setShowPassword(!showPassword)}>
+                            {showPassword ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
+                        </span>
+                    </div>
                 </div>
 
                 <p className="forgot-password">Forgot password ?</p>

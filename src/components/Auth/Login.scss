@@ -56,3 +56,18 @@
         }
     }
 }
+
+.form-group.input-password {
+    position: relative;
+}
+
+span.toggle-eyes {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+
+    &:hover {
+        color: #ccc;
+    }
+}

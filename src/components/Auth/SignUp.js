@@ -4,8 +4,7 @@ import { toast } from 'react-toastify';
 import { BsFillEyeSlashFill } from 'react-icons/bs';
 import { BsFillEyeFill } from 'react-icons/bs';
 
-import { postCreateNewUser } from '../../service/apiService';
-import { getAllUsers } from '../../service/apiService';
+import { postSignUp } from '../../service/apiService';
 import './Signup.scss';
 
 const SignUp = (props) => {
@@ -38,8 +37,8 @@ const SignUp = (props) => {
             return;
         }
 
-        let data = await postCreateNewUser(email, password, username);
-        console.log(data);
+        let data = await postSignUp(email, password, username);
+        navigation('/login');
 
         if (data && data.EC === 0) {
             toast.success(data.EM);
