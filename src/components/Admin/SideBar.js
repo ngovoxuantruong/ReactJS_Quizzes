@@ -34,10 +34,12 @@ const SideBar = (props) => {
                         }}
                     >
                         <DiReact size={'3em'} color={'#00bfff'} />
-
-                        <a style={{ textDecoration: 'none' }} href="/">
+                        <Link
+                            to={'/'}
+                            style={{ textDecoration: 'underline', color: '#ccc', textUnderlineOffset: '4px' }}
+                        >
                             Xuan Truong
-                        </a>
+                        </Link>
                     </div>
                 </SidebarHeader>
 

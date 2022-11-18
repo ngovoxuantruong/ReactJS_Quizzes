@@ -44,6 +44,12 @@
             margin: 20px 0;
             color: white;
             background: black;
+
+            &:disabled {
+                background-color: #dddd;
+                color: #afafaf;
+                cursor: no-drop;
+            }
         }
 
         .back {
@@ -55,19 +61,36 @@
             }
         }
     }
-}
 
-.form-group.input-password {
-    position: relative;
-}
+    .form-group.input-password {
+        position: relative;
+    }
 
-span.toggle-eyes {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    cursor: pointer;
+    span.toggle-eyes {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        cursor: pointer;
 
-    &:hover {
-        color: #ccc;
+        &:hover {
+            color: #ccc;
+        }
+    }
+
+    .loader-icon {
+        font-size: 14px;
+        margin-bottom: 3px;
+        color: #00d4ff;
+        animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+        from {
+            transform: scale(1) rotate(0);
+        }
+
+        to {
+            transform: scale(1) rotate(360deg);
+        }
     }
 }
