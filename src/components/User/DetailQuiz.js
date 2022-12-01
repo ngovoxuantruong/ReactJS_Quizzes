@@ -9,7 +9,6 @@ import Question from './Question';
 const DetailQuiz = (props) => {
     const params = useParams();
     const quizId = params.id;
-
     const location = useLocation();
 
     const [dataQuiz, setDataQuiz] = useState([]);
@@ -37,6 +36,7 @@ const DetailQuiz = (props) => {
                             questionDescription = item.description;
                             image = item.image;
                         }
+                        item.answers.isSelected = false;
                         answers.push(item.answers);
                     });
 
@@ -46,7 +46,6 @@ const DetailQuiz = (props) => {
             setDataQuiz(data);
         }
     };
-    console.log(dataQuiz);
 
     const handleNext = () => {
         if (dataQuiz && dataQuiz.length > index + 1) {
@@ -62,6 +61,26 @@ const DetailQuiz = (props) => {
         }
     };
 
+    const handleCheckbox = (answerId, questionId) => {
+        let dataQuizClone = _.cloneDeep(dataQuiz);
+        let question = dataQuizClone.find((item) => +item.questionId === +questionId);
+        if (question && question.answers) {
+            let b = question.answers.map((item) => {
+                if (+item.id === +answerId) {
+                    item.isSelected = !item.isSelected;
+                }
+                return item;
+            });
+            question.answers = b;
+        }
+        let index = dataQuizClone.findIndex((item) => +item.questionId === +questionId);
+        if (index - 1) {
+            dataQuizClone[index] = question;
+            setDataQuiz(dataQuizClone);
+        }
+    };
+    console.log(dataQuiz);
+
     return (
         <div className="detail-quiz-container">
             <div className="left-content">
@@ -75,6 +94,7 @@ const DetailQuiz = (props) => {
 
                 <div className="q-content">
                     <Question
+                        handleCheckbox={handleCheckbox}
                         index={index}
                         data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
                     />
@@ -87,6 +107,10 @@ const DetailQuiz = (props) => {
 
                     <button onClick={() => handleNext()} className="btn btn-primary">
                         Next
+                    </button>
+
+                    <button onClick={() => handleNext()} className="btn btn-warning">
+                        Finish
                     </button>
                 </div>
             </div>
